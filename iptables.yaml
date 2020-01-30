@@ -1,0 +1,30 @@
+- hosts: all
+  tasks: 
+  - name: Allow port 22, 8006
+    iptables:
+     chain: INPUT
+     destination_port: 22
+     jump: ACCEPT
+     protocol: tcp
+    become: yes
+    loop: "{{ ports }}"
+    tags: iptables1
+ 
+  - name: Allow internodes communication
+    iptables:
+     chain: INPUT
+     dst_range: 192.168.41.135-192.168.41.137
+     jump: ACCEPT
+     protocol: tcp
+    become: yes
+    tags: iptables1
+  
+  - name: Block IP
+    iptables:
+     chain: INPUT
+     jump: DROP
+     protocol: tcp
+    become: yes
+    tags: iptables
+        
+      
