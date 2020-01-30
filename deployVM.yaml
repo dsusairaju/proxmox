@@ -1,0 +1,31 @@
+- hosts: all
+  tasks:
+   - name: "DeployVM1"
+     proxmox_kvm:
+      api_user     : root@pam
+      api_password : itescia2020
+      api_host     : 192.168.41.135
+      name         : vm1
+      node         : pve1
+      ide          : '{"ide0":"local:iso/ubuntu-18.04.3-live-server-amd64.iso,media=cdrom"}'
+      autostart    : yes 
+  
+   - name: "DeployVM2"
+     proxmox_kvm:
+      api_user     : root@pam
+      api_password : itescia2020
+      api_host     : 192.168.41.136
+      name         : vm2
+      node         : pve2
+      ide          : '{"ide0":"local:iso/ubuntu-18.04.3-live-server-amd64.iso,media=cdrom"}'
+      autostart    : yes
+
+   - name: "DeployVM3"
+     proxmox_kvm:
+      api_user     : root@pam
+      api_password : itescia2020
+      api_host     : 192.168.41.137
+      name         : vm3
+      node         : pve3
+      ide          : '{"ide0":"local:iso/ubuntu-18.04.3-live-server-amd64.iso,media=cdrom"}'
+      autostart    : yes
