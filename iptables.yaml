@@ -1,0 +1,28 @@
+- hosts: test
+  remote_user: root
+  tasks:
+  - name: block IP
+    iptables:
+     chain: INPUT
+     jump: DROP
+     protocol: tcp
+    become: yes
+    tags: iptables
+
+  - name: Allow port 22
+    iptables:
+     chain: INPUT
+     destination_port: 22
+     jump: ACCEPT
+     protocol: tcp
+    become: yes
+    tags: iptables1
+
+  - name: Allow port 8006
+    iptables:
+     chain: INPUT
+     destination_port: 8006
+     jump: ACCEPT
+     protocol: tcp
+    become: yes
+    tags: iptables2

@@ -1,0 +1,32 @@
+- hosts: test
+  remote_user: root
+  vars:
+    package:
+               - 'python-pip'
+               - 'python-dev'
+               - 'build-essential'
+               - 'python-proxmoxer'
+  tasks:
+   - name: installation packages
+     package:
+        name: "{{ item }}"
+        state: latest
+     loop: "{{ package }}"
+
+
+   - name: Deploiement VM
+     proxmox:
+       node: proxmox1
+       api_user: root@pam
+       api_password: itescia
+       api_host: 192.168.35.130
+       password: itescia
+       hostname: VMtest
+       storage: local-lvm
+       onboot: yes
+       ostemplate: 'local:vztmpl/debian-8.0-standard_8.11-1_amd64.tar.gz'
+       # ctcores: 2
+       # ctmemory: 1024
+       # ctswap: 512
+       # ctdisk: 10
+       # ctstorage: Proxmox
